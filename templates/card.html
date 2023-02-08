@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flash Card</title>
+</head>
+<body>
+    <h1>Flash Card</h1>
+    <p>Question : {{data.pertanyaan}}</p>
+    <p>Answer   : {{data.jawab}}</p>
+    <p>
+        <a href="{{ url_for('welcome') }}">welcome Page</a>
+        
+        <button>
+        {% if nomor < max_nomor %}
+            <a href="{{ url_for('card_view_by_nomor', nomor=nomor+1) }}">
+                Next Card
+            </a>
+        {% else %}
+            <a href="{{ url_for('card_view_by_nomor', nomor=0) }}">
+                Start over
+            </a>
+        {% endif %}
+    </button>
+    </p>
+</body>
+</html>
