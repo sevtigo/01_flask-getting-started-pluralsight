@@ -1,5 +1,5 @@
 from datetime import datetime
-from flask import Flask, render_template, abort 
+from flask import Flask, render_template, abort, request, redirect, url_for
 from model import db
 from markupsafe import escape
 
@@ -27,9 +27,15 @@ def card_view_by_nomor(nomor):
     except IndexError:
         abort(404)
 
-@app.route("/add_card")
+@app.route("/add_card", methods=["GET", "POST"])
 def add_card():
-    return render_template("add_card.html")
+    if request.method == "POST":
+        card = {"pertanyaan": request.form['pertanyaan'],
+                "jawab": request.form['jawab']}
+        db.append(card)
+        return redirect(url_for('card_view_by_nomor', nomor=len(db)-1))
+    else:
+        return render_template("add_card.html")
 
 @app.route("/api/card")
 def api_card_view():

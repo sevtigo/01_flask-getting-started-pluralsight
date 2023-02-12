@@ -8,7 +8,7 @@
 </head>
 <body>
     <h1>Add a new card</h1>
-    <form action="" method="post">
+    <form action="{{ url_for('add_card') }}" method="post">
         <p><input type="text" name="pertanyaan" id=""></p>
         <p><input type="text" name="jawab" id=""></p>
         <button type="submit">Create</button>
